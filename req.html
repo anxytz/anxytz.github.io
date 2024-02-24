@@ -1,0 +1,16 @@
+<script>
+  // Get the URL parameter from the query string
+const urlParams = new URLSearchParams(window.location.search);
+const targetUrl = urlParams.get('url');
+
+// Check if the 'url' parameter is present
+if (targetUrl) {
+  // Make a request to the URL provided in the parameter
+  fetch(targetUrl)
+    .then(response => response.text())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+} else {
+  console.error('URL parameter not found');
+}
+</script>
