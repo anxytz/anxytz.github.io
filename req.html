@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Pages Requestor</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web API Example</title>
 </head>
 <body>
-    <button onclick="makeRequest()">Make Request</button>
-    <div id="result"></div>
 
-    <script>
-        function makeRequest() {
-            // Get the 'url' parameter from the query string
-            const urlParam = new URLSearchParams(window.location.search).get('url');
-            
-            // Check if 'url' parameter is present
-            if (urlParam) {
-                const url = decodeURIComponent(urlParam);
+<script>
+  async function fetchData() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const apiUrl = urlParams.get('url');
 
-                // Make the request and output the content
-                fetch(url)
-                    .then(response => response.text())
-                    .then(data => {
-                        document.getElementById('result').innerHTML = data;
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            } else {
-                console.error('No URL parameter provided');
-            }
-        }
-    </script>
+    if (!apiUrl) {
+      console.error('URL parameter is missing');
+      return;
+    }
+
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.text();
+      console.log('Data from API:', data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+  fetchData();
+</script>
+
 </body>
 </html>
