@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Parameter Example</title>
+</head>
+<body>
+  <p id="parameterValue">Parameter Value: </p>
+
+  <script>
+    // Get the current URL
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Get a specific parameter value by its name
+    const paramValue = urlParams.get('yourParameterName');
+
+    // Update HTML element with the parameter value
+    const parameterElement = document.getElementById('parameterValue');
+    parameterElement.textContent += paramValue || 'Not found';
+  </script>
+</body>
+</html>
