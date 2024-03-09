@@ -14,7 +14,7 @@
     const urlParams = new URLSearchParams(window.location.search);
 
     // Get a specific parameter value by its name
-    const paramValue = urlParams.get('yourParameterName');
+    const paramValue = urlParams.get('url');
 
     // Update HTML element with the parameter value
     const parameterElement = document.getElementById('parameterValue');
@@ -33,6 +33,7 @@
           } else {
             // Handle error or display appropriate message
             responseTextElement.textContent += 'Error loading URL: ' + paramValue;
+            console.error('Error loading URL:', xhr.status, xhr.statusText);
           }
         }
       };
