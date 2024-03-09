@@ -7,9 +7,10 @@
 </head>
 <body>
   <p id="parameterValue">Parameter Value: </p>
+  <pre id="responseText">Response Text: </pre>
 
   <script>
-    // Get the current URL
+    // Get the current URL parameters
     const urlParams = new URLSearchParams(window.location.search);
 
     // Get a specific parameter value by its name
@@ -18,6 +19,25 @@
     // Update HTML element with the parameter value
     const parameterElement = document.getElementById('parameterValue');
     parameterElement.textContent += paramValue || 'Not found';
+
+    // Use XMLHttpRequest to make a request to the specified URL
+    if (paramValue) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', paramValue);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          const responseTextElement = document.getElementById('responseText');
+          if (xhr.status === 200) {
+            // Update HTML with raw text response
+            responseTextElement.textContent += xhr.responseText;
+          } else {
+            // Handle error or display appropriate message
+            responseTextElement.textContent += 'Error loading URL: ' + paramValue;
+          }
+        }
+      };
+      xhr.send();
+    }
   </script>
 </body>
 </html>
